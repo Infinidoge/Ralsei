@@ -40,8 +40,10 @@ async def pre_cmd(message):
 
 async def exec_cmd(message):
     try:
+        print("cmd_run")
         await cmd[message.content.replace(config.prefix, "").split(' ')[0]](client, message)
     except KeyError:
+        print("alia_run")
         try:
             alias(message.content.replace(config.prefix, "").split(' ')[0])
         except KeyError:

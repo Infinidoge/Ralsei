@@ -12,6 +12,7 @@ import discord
 
 async def roll_cmd(client, message):
     cmd = message.content[6:]
+    print("roll_run")
 
     if "+" in cmd:
         pre = cmd.split("+")

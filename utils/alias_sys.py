@@ -12,6 +12,7 @@ perms = Perms()
 
 class Alias:
     async def d20(self, client):
+        print("d20_run")
         await roll_cmd(client, "!roll 1d20")
 
     def __init__(self):
