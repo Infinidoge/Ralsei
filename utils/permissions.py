@@ -8,6 +8,7 @@
 
 import configparser
 
+
 def gen_perms(perms_file):
     config = configparser.ConfigParser()
 

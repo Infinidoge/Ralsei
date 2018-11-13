@@ -27,19 +27,17 @@ async def roll_cmd(client, message):
                 roll = random.randint(1, int(dice[1]))
                 rolls.append(roll)
             await client.send_message(message.channel, "[<@%s>]\n:game_die: Rolling: %sd%s:\n%s\nsum:%s" %
-                                                                                                (message.author.id,
-                                                                                                 str(dice[0]),
-                                                                                                 str(dice[1]),
-                                                                                                 str("+".join(
-                                                                                                   [str(i)
-                                                                                                    for i in rolls]) +
-                                                                                                   "**+%s**" % mod),
-                                                                                                  str(sum(rolls)
-                                                                                                      + int(mod))))
+                                      (message.author.id,
+                                       str(dice[0]),
+                                       str(dice[1]),
+                                       str("+".join(
+                                           [str(i)
+                                            for i in rolls]) +
+                                           "**+%s**" % mod),
+                                       str(sum(rolls) + int(mod))))
         except discord.errors.HTTPException:
             await client.send_message(message.channel,
                                       "Those numbers are a little too large for my handful of dice, sorry!")
-
 
     elif "-" in cmd:
         pre = cmd.split("-")
@@ -55,15 +53,14 @@ async def roll_cmd(client, message):
                 roll = random.randint(1, int(dice[1]))
                 rolls.append(roll)
             await client.send_message(message.channel, "[<@%s>]\n:game_die: Rolling: %sd%s:\n%s\nsum:%s" %
-                                                                                                (message.author.id,
-                                                                                                 str(dice[0]),
-                                                                                                 str(dice[1]),
-                                                                                                 str("+".join(
-                                                                                                   [str(i)
-                                                                                                    for i in rolls]) +
-                                                                                                   "**-%s**" % mod),
-                                                                                                  str(sum(rolls)
-                                                                                                      - int(mod))))
+                                      (message.author.id,
+                                       str(dice[0]),
+                                       str(dice[1]),
+                                       str("+".join(
+                                           [str(i)
+                                            for i in rolls]) +
+                                           "**-%s**" % mod),
+                                       str(sum(rolls) - int(mod))))
         except discord.errors.HTTPException:
             await client.send_message(message.channel,
                                       "Those numbers are a little too large for my handful of dice, sorry!")
@@ -80,13 +77,13 @@ async def roll_cmd(client, message):
                 roll = random.randint(1, int(cmd[1]))
                 rolls.append(roll)
             await client.send_message(message.channel, "[<@%s>]\n:game_die: Rolling: %sd%s:\n%s\nsum:%s" %
-                                                                                                (message.author.id,
-                                                                                                 str(cmd[0]),
-                                                                                                 str(cmd[1]),
-                                                                                                 str("+".join(
-                                                                                                    [str(i)
-                                                                                                     for i in rolls])),
-                                                                                                 str(sum(rolls))))
+                                      (message.author.id,
+                                       str(cmd[0]),
+                                       str(cmd[1]),
+                                       str("+".join(
+                                           [str(i)
+                                            for i in rolls])),
+                                       str(sum(rolls))))
 
         except discord.errors.HTTPException:
             await client.send_message(message.channel,

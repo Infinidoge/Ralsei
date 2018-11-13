@@ -12,8 +12,8 @@ perms = Perms()
 
 async def stats(client, message):
     stat_total = 0
+    stat_block = []
     while stat_total < 70:
-        stat_block = []
         # Generate the main stats
         for i in range(6):
             rand = random.randint(1, 20)
