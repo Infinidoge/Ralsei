@@ -43,9 +43,9 @@ async def exec_cmd(message):
         print("cmd_run")
         await cmd[message.content.replace(config.prefix, "").split(' ')[0]](client, message)
     except KeyError:
-        print("alia_run")
+        print("alias_run")
         try:
-            alias(message.content.replace(config.prefix, "").split(' ')[0])
+            await alias(message.content.replace(config.prefix, "").split(' ')[0], client, message)
         except KeyError:
             await client.send_message(message.channel,
                                       "I'm sorry <@%s>, but i have no idea what you just asked me to do. Sorry!" %
