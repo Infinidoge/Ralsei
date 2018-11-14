@@ -18,7 +18,7 @@ async def roll_cmd(client, message):
         pre = cmd.split("+")
         dice, mod = pre
         dice = dice.lower().split("d")
-        if int(dice[0] > 500) or int(dice[1]) > 1000:
+        if int(dice[0]) > 500 or int(dice[1]) > 1000:
             await client.send_message(message.channel,
                                       "Those numbers are a little too large for my handful of dice, sorry!")
             return
