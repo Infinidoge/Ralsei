@@ -5,27 +5,46 @@
 # Utility base for creating aliases for commands
 # ----------------------------------
 
-from cmds.roll_cmd import roll_cmd
 from utils.permissions import Perms
-import asyncio
+import configparser
 perms = Perms()
 
 
+def gen_alias(alias_file):
+    config = configparser.ConfigParser()
+
+    config["RalseiAlias"] = {"token": "blank",
+                             "prefix": "!",
+                             "location": "blank"}
+    with open(alias_file, 'w') as configfile:
+        config.write(configfile)
+
+
+def read_alias(alias_file):
+    config = configparser.ConfigParser()
+    config.read(alias_file)
+    try:
+        return config
+    except:
+        gen_alias(alias_file)
+        read_alias(alias_file)
+
+
+def update_config():
+    pass
+
+
 class Alias:
-    async def d20(self, client, message):
-        print("d20_run")
-        message.content = "!roll 1d20"
-        await roll_cmd(client, message)
 
-    def __init__(self):
-        print("alias_init")
-        self.alias = {"d20": self.d20}
+    def __init__(self, alias_file="RalseiAlias.ini"):
+        aliasconfig = read_alias(alias_file)
+        self.alias = {}
+        for i in aliasconfig["RalseiAlias"].keys():
+            self.alias[i] = aliasconfig["RalseiAlias"][i]
 
-    async def __call__(self, cmd, client, message):
-        print("alias_called")
+    def __call__(self, cmd, message):
         try:
-            await self.alias[cmd](client, message)
-            print(cmd)
+            message.content = self.alias[cmd]
+            return message
         except KeyError:
-            print("key error")
             raise KeyError

@@ -14,7 +14,8 @@ def gen_config(config_file):
 
     config["Ralsei"] = {"token": "blank",
                         "prefix": "!",
-                        "location": "blank"}
+                        "location": "blank",
+                        "alias": True}
     with open(config_file, 'w') as configfile:
         config.write(configfile)
 
@@ -23,7 +24,7 @@ def read_config(config_file):
     config = configparser.ConfigParser()
     config.read(config_file)
     try:
-        return config["Ralsei"]
+        return config
     except:
         gen_config(config_file)
         read_config(config_file)
@@ -36,6 +37,7 @@ def update_config():
 class Client:
     def __init__(self, config_file="Ralsei.ini"):
         config = read_config(config_file)
-        self.token = config["token"]
-        self.prefix = config["prefix"]
-        self.location = config["location"]
+        self.token = config["Ralsei"]["token"]
+        self.prefix = config["Ralsei"]["prefix"]
+        self.location = config["Ralsei"]["location"]
+        self.alias = config["Ralsei"].getboolean("alias")

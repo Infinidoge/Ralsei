@@ -45,7 +45,10 @@ async def exec_cmd(message):
     except KeyError:
         print("alias_run")
         try:
-            await alias(message.content.replace(config.prefix, "").split(' ')[0], client, message)
+            message = alias(message.content.replace(config.prefix, "").split(' ')[0], message)
+            print("alias-cmd_run")
+            await cmd[message.content.replace(config.prefix, "").split(' ')[0]](client, message)
+
         except KeyError:
             await client.send_message(message.channel,
                                       "I'm sorry <@%s>, but i have no idea what you just asked me to do. Sorry!" %
@@ -70,16 +73,19 @@ for i in find_files(config.location + "cmds"):
     cmd[i.replace("_cmd", "")] = eval(i)
 
 
-
-
 @client.event
 async def on_message(message):
     if message.content.startswith(config.prefix):
         await pre_cmd(message)
 
-        if message.content.startswith("!disabled"):
+        if message.content.startswith("!reload-alias") and perms.check_owner(message):
+            await client.send_message(message.channel, "Reloading aliases <@%s>, give me a moment." %
+                                      message.author.id)
+            global alias
+            alias = alias_mod.Alias()
             await asyncio.sleep(1)
-            await client.send_message(message.channel, "That command is disabled, sorry!")
+            await client.send_message(message.channel, "Reloading complete. Enjoy your aliases <@%s>!" %
+                                      message.author.id)
         else:
             await exec_cmd(message)
 
