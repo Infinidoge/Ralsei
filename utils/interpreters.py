@@ -30,7 +30,7 @@ def hq_interp(program):
         elif i == "q":
             output += program
         elif i == "9":
-            for x in range(99, 1, -1):
+            for x in range(10, 1, -1):
                 output += f"{x} bottles of beer on the wall,\n{x} bottles of beer.\nTake one down, pass it around,"
 
                 if i == 2:
