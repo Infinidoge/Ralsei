@@ -1,5 +1,5 @@
 # ----------------------------------
-# Ralsei/cmds/test_perms_cmd
+# Ralsei/cmds/test_cmd
 # Created by Infinidoge
 # ----------------------------------
 # Used to test permissions with decorators

@@ -12,3 +12,4 @@ perms = Perms()
 async def print_cmd(client, message):
     await client.send_message(message.channel, message.content[7:])
         #await client.send_message(message.channel, "*Refuses to listen to <@" + message.author.id + ">*")
+
