@@ -83,6 +83,7 @@ for i in find_files(config.location + "cmds"):
 @client.event
 async def on_message(message):
     if message.content.startswith(config.prefix):
+        message.content = str(message.content).lower()
         await pre_cmd(message)
 
         if message.content.startswith("!reload-alias"):
