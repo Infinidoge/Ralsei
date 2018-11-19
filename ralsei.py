@@ -86,10 +86,7 @@ async def on_message(message):
         message.content = str(message.content).lower()
         await pre_cmd(message)
 
-        if message.content.startswith("!reload-alias"):
-            await reload_alias(client, message)
-        else:
-            await exec_cmd(message)
+        await exec_cmd(message)
 
         await post_cmd(message)
 
