@@ -21,6 +21,7 @@ def read_perms(perms_file):
     config = configparser.ConfigParser()
     config.read(perms_file)
     try:
+        config["RalseiPerms"]["owner"]
         return config
     except:
         gen_perms(perms_file)
