@@ -53,7 +53,7 @@ async def exec_cmd(message):
 
 
 async def post_cmd(message):
-    if not client.is_closed:
+    if not client.is_closed and message.content.replace(config.prefix, "").split(' ')[0] in ["print"]:
         await client.delete_message(message)
 
 
