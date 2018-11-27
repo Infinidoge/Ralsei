@@ -13,9 +13,14 @@ perms = Perms()
 def gen_alias(alias_file):
     config = configparser.ConfigParser()
 
-    config["RalseiAlias"] = {"token": "blank",
-                             "prefix": "!",
-                             "location": "blank"}
+    config["RalseiAlias"] = {"d4": "!roll 1d4",
+                             "d6": "!roll 1d6",
+                             "d8": "!roll 1d8",
+                             "d10": "!roll 1d10",
+                             "d12": "!roll 1d12",
+                             "d20": "!roll 1d20",
+                             "d100": "!roll 1d100",
+                             "d%": "!roll 1d100",}
     with open(alias_file, 'w') as configfile:
         config.write(configfile)
 
@@ -24,6 +29,7 @@ def read_alias(alias_file):
     config = configparser.ConfigParser()
     config.read(alias_file)
     try:
+        config["RalseiAlias"]
         return config
     except:
         gen_alias(alias_file)

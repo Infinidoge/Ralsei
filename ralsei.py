@@ -40,13 +40,10 @@ async def pre_cmd(message):
 
 async def exec_cmd(message):
     try:
-        print("cmd_run")
         await cmd[message.content.replace(config.prefix, "").split(' ')[0]](client, message)
     except KeyError:
-        print("alias_run")
         try:
             message = alias(message.content.replace(config.prefix, "").split(' ')[0], message)
-            print("alias-cmd_run")
             await cmd[message.content.replace(config.prefix, "").split(' ')[0]](client, message)
 
         except KeyError:
@@ -56,7 +53,7 @@ async def exec_cmd(message):
 
 
 async def post_cmd(message):
-    if not client.is_closed:
+    if not client.is_closed and message.content.replace(config.prefix, "").split(' ')[0] in ["print"]:
         await client.delete_message(message)
 
 
@@ -65,8 +62,18 @@ async def post_cmd(message):
 
 # Define command functions
 
+@perms.check_dev
+async def reload_alias(client, message):
+    await client.send_message(message.channel, "Reloading aliases <@%s>, give me a moment." %
+                              message.author.id)
+    global alias
+    alias = alias_mod.Alias()
+    await asyncio.sleep(1)
+    await client.send_message(message.channel, "Reloading complete. Enjoy your aliases <@%s>!" %
+                              message.author.id)
+
 # ------------------------
-cmd = {}
+cmd = {"reload-alias": reload_alias}
 for i in find_files(config.location + "cmds"):
     i = i.replace(".py", "")
     exec("from cmds.%s import %s" % (i, i), globals())
@@ -76,18 +83,10 @@ for i in find_files(config.location + "cmds"):
 @client.event
 async def on_message(message):
     if message.content.startswith(config.prefix):
+        message.content = str(message.content).lower()
         await pre_cmd(message)
 
-        if message.content.startswith("!reload-alias") and perms.check_owner(message):
-            await client.send_message(message.channel, "Reloading aliases <@%s>, give me a moment." %
-                                      message.author.id)
-            global alias
-            alias = alias_mod.Alias()
-            await asyncio.sleep(1)
-            await client.send_message(message.channel, "Reloading complete. Enjoy your aliases <@%s>!" %
-                                      message.author.id)
-        else:
-            await exec_cmd(message)
+        await exec_cmd(message)
 
         await post_cmd(message)
 

@@ -9,9 +9,7 @@ from utils.permissions import Perms
 perms = Perms()
 
 
+@perms.check_dev
 async def shutdown_cmd(client, message):
-    if perms.check_owner(message):
-        await client.send_message(message.channel, "Goodbye!")
-        await client.close()
-    else:
-        await client.send_message(message.channel, "You do not have permission to run this command.")
+    await client.send_message(message.channel, "Goodbye!")
+    await client.close()

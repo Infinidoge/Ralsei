@@ -12,23 +12,25 @@ perms = Perms()
 
 async def stats(client, message):
     stat_total = 0
-    stat_block = []
     while stat_total < 70:
+        stat_total = 0
+        stat_block = []
         # Generate the main stats
         for i in range(6):
             rand = random.randint(1, 20)
-            # Re-roll below 6
-            while rand < 6:
-                rand = random.randint(1, 20)
             stat_block.append(rand)
-        stat_block.sort()
-        # Re-roll the lowest
-        rand = random.randint(1, 20)
-        if rand > stat_block[0]:
-            stat_block[0] = rand
-            stat_block.sort()
-
         stat_total = sum(stat_block)
+    # Re-roll below 6
+    for i in range(len(stat_block)):
+        if stat_block[i] < 6:
+            rand = random.randint(1, 20)
+            stat_block[i] = rand
+    stat_block.sort()
+    # Re-roll the lowest
+    rand = random.randint(1, 20)
+    if rand > stat_block[0]:
+        stat_block[0] = rand
+        stat_block.sort()
 
     # Convert everything above 18 into 18, with the original number in parenthesis
     for i in range(len(stat_block)):

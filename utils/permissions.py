@@ -21,7 +21,8 @@ def read_perms(perms_file):
     config = configparser.ConfigParser()
     config.read(perms_file)
     try:
-        return config["RalseiPerms"]
+        config["RalseiPerms"]["owner"]
+        return config
     except:
         gen_perms(perms_file)
         read_perms(perms_file)
@@ -30,7 +31,20 @@ def read_perms(perms_file):
 class Perms:
     def __init__(self, perms_file="RalseiPerms.ini"):
         perms = read_perms(perms_file)
-        self.owner_id = perms["owner"]
+        self.owner_id = perms["RalseiPerms"]["owner"]
+
+    def check_dev(self, func):
+        owner_id = self.owner_id
+
+        async def inner(client, message):
+            if owner_id != message.author.id:
+                await client.send_message(message.channel, "You don't have permission, sorry!")
+                return
+            else:
+                await func(client, message)
+                return
+
+        return inner
 
     def check_owner(self, message):
         return True if (self.owner_id == message.author.id) else False
