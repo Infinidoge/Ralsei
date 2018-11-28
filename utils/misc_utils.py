@@ -18,4 +18,3 @@ def capital(self: str):
     for i in self:
         r += i.capitalize()
     return r
-

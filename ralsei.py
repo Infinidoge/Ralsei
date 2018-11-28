@@ -35,10 +35,14 @@ async def on_ready():
 # Define utility functions
 
 async def pre_cmd(message):
+    global client
+
     return message
 
 
 async def exec_cmd(message):
+    global client
+
     try:
         await cmd[message.content.replace(config.prefix, "").split(' ')[0]](client, message)
     except KeyError:
@@ -53,6 +57,8 @@ async def exec_cmd(message):
 
 
 async def post_cmd(message):
+    global client
+
     if not client.is_closed and message.content.replace(config.prefix, "").split(' ')[0] in ["print"]:
         await client.delete_message(message)
 
@@ -62,7 +68,7 @@ async def post_cmd(message):
 
 # Define command functions
 
-@perms.check_dev
+@perms.check_admin
 async def reload_alias(client, message):
     await client.send_message(message.channel, "Reloading aliases <@%s>, give me a moment." %
                               message.author.id)
