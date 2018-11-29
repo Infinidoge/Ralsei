@@ -44,11 +44,11 @@ async def exec_cmd(message):
     global client
 
     try:
-        await cmd[message.content.replace(config.prefix, "").split(' ')[0]](client, message)
+        await cmd[message.content.replace(config.prefix, "").split(' ')[0].lower()](client, message)
     except KeyError:
         try:
-            message = alias(message.content.replace(config.prefix, "").split(' ')[0], message)
-            await cmd[message.content.replace(config.prefix, "").split(' ')[0]](client, message)
+            message = alias(message.content.replace(config.prefix, "").split(' ')[0].lower(), message)
+            await cmd[message.content.replace(config.prefix, "").split(' ')[0].lower()](client, message)
 
         except KeyError:
             await client.send_message(message.channel,
@@ -59,7 +59,7 @@ async def exec_cmd(message):
 async def post_cmd(message):
     global client
 
-    if not client.is_closed and message.content.replace(config.prefix, "").split(' ')[0] in ["print"]:
+    if not client.is_closed and message.content.replace(config.prefix, "").split(' ')[0].lower() in ["print"]:
         await client.delete_message(message)
 
 
@@ -89,7 +89,7 @@ for i in find_files(config.location + "cmds"):
 @client.event
 async def on_message(message):
     if message.content.startswith(config.prefix):
-        message.content = str(message.content).lower()
+        message.content = str(message.content)
         await pre_cmd(message)
 
         await exec_cmd(message)
