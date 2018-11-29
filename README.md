@@ -1,6 +1,6 @@
 # Ralsei
 #### Ralsei, the fluffiest discord goat around.
-#####`Version: 0.1` `Dev-Main Version: 0.12`
+`Version: 0.1` `Dev-Main Version: 0.12`
 Ralsei is a general purpose discord bot that is continually evolving based on your suggestions for commands and features.  
 Have a new feature suggestion? Create an issue and have `[suggestion]` at the frond.
 
