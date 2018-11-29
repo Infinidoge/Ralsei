@@ -9,6 +9,6 @@ from utils.permissions import Perms
 perms = Perms()
 
 
-@perms.check_owner
+@perms.check_perms("admin")
 async def print_cmd(client, message):
     await client.send_message(message.channel, message.content[7:])
