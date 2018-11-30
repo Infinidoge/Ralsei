@@ -9,8 +9,6 @@ from utils.permissions import Perms
 perms = Perms()
 
 
-@perms.check_dev
+@perms.check_perms("admin")
 async def print_cmd(client, message):
     await client.send_message(message.channel, message.content[7:])
-        #await client.send_message(message.channel, "*Refuses to listen to <@" + message.author.id + ">*")
-

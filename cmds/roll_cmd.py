@@ -27,7 +27,7 @@ async def roll_cmd(client, message):
                                           "the limit is %s dice with %s sides each," % (dice_max, sides_max) +
                                           " and a maximum modifier of ±%s. (+ or - %s)" % (mod_max, mod_max))
                 return
-            elif int(dice[0]) < 1or int(dice[1]) < 1:
+            elif int(dice[0]) < 1 or int(dice[1]) < 1:
                 await client.send_message(message.channel,
                                           "I'm uh, not sure how to roll that dice.")
                 return
@@ -60,7 +60,7 @@ async def roll_cmd(client, message):
                                           "the limit is %s dice with %s sides each," % (dice_max, sides_max) +
                                           " and a maximum modifier of ±%s. (+ or - %s)" % (mod_max, mod_max))
                 return
-            elif int(dice[0]) < 1or int(dice[1]) < 1:
+            elif int(dice[0]) < 1 or int(dice[1]) < 1:
                 await client.send_message(message.channel,
                                           "I'm uh, not sure how to roll that dice.")
                 return
@@ -91,7 +91,7 @@ async def roll_cmd(client, message):
                                           " and a maximum modifier of ±%s. (+ or - %s)" % (mod_max, mod_max))
 
                 return
-            elif int(dice[0]) < 1or int(dice[1]) < 1:
+            elif int(dice[0]) < 1 or int(dice[1]) < 1:
                 await client.send_message(message.channel,
                                           "I'm uh, not sure how to roll that dice.")
                 return

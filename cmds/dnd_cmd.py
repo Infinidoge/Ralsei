@@ -11,15 +11,15 @@ perms = Perms()
 
 
 async def stats(client, message):
-    stat_total = 0
+    stat_block, stat_total = [], 0
     while stat_total < 70:
-        stat_total = 0
         stat_block = []
         # Generate the main stats
         for i in range(6):
             rand = random.randint(1, 20)
             stat_block.append(rand)
         stat_total = sum(stat_block)
+
     # Re-roll below 6
     for i in range(len(stat_block)):
         if stat_block[i] < 6:

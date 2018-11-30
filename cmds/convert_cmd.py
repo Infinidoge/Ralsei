@@ -10,8 +10,6 @@ from utils.misc_utils import capital
 from currency_converter import CurrencyConverter
 c, perms = CurrencyConverter(), Perms()
 
-subcmd = {}
-
 
 async def convert_cmd(client, message):
     cmd = message.content[9:]
@@ -21,6 +19,3 @@ async def convert_cmd(client, message):
     await client.send_message(message.channel, "[<@%s>]\n**Currency Conversion:** %s *to* %s\n`%s`**%s** is `%s`**%s**"
                               % (str(message.author.id), currency[0], currency[1], str(amount), currency[0],
                                  round(c.convert(int(amount), currency[0], currency[1]), 2), currency[1]))
-
-    # cmd = message.content[5:]
-    # await subcmd[cmd.split(' ')[0]](client, message)
