@@ -6,9 +6,10 @@
 # ----------------------------------
 
 from utils.permissions import Perms
-perms = Perms()
+from utils.config import Client
+perms, config = Perms(), Client()
 
 
 @perms.check_perms("admin")
 async def print_cmd(client, message):
-    await client.send_message(message.channel, message.content[7:])
+    await client.send_message(message.channel, message.content[6+len(config.prefix):])

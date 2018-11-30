@@ -8,6 +8,8 @@
 
 import random
 import discord
+from utils.config import Client
+config = Client()
 
 dice_max = 500
 sides_max = 500
@@ -15,7 +17,7 @@ mod_max = 999999
 
 
 async def roll_cmd(client, message):
-    cmd = message.content[6:]
+    cmd = message.content[5+len(config.prefix):]
     try:
         if "+" in cmd:
             pre = cmd.split("+")
