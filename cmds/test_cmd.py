@@ -7,7 +7,8 @@
 
 
 from utils.permissions import Perms
-perms = Perms()
+from utils.config import Client
+perms, config = Perms(), Client()
 
 
 @perms.check_dev
@@ -36,7 +37,7 @@ subcmd = {"dev":   test_dev,
 
 
 async def test_cmd(client, message):
-    cmd = message.content[6:].split(" ")
+    cmd = message.content[5+len(config.prefix):].split(" ")
 
     try:
         await subcmd[cmd[0]](client, message)

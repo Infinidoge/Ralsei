@@ -7,7 +7,8 @@
 
 import random
 from utils.permissions import Perms
-perms = Perms()
+from utils.config import Client
+perms, config = Perms(), Client()
 
 
 async def stats(client, message):
@@ -46,5 +47,5 @@ subcmd = {"stats": stats}
 
 
 async def dnd_cmd(client, message):
-    cmd = message.content[5:]
+    cmd = message.content[4+len(config.prefix):]
     await subcmd[cmd.split(' ')[0]](client, message)

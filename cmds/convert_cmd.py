@@ -8,11 +8,12 @@
 from utils.permissions import Perms
 from utils.misc_utils import capital
 from currency_converter import CurrencyConverter
-c, perms = CurrencyConverter(), Perms()
+from utils.config import Client
+c, perms, config = CurrencyConverter(), Perms(), Client()
 
 
 async def convert_cmd(client, message):
-    cmd = message.content[9:]
+    cmd = message.content[8+len(config.prefix):]
     currency, amount = cmd.split(" ")
     currency, amount = currency.split("-"), int(amount)
     currency[0], currency[1] = capital(currency[0]), capital(currency[1])
